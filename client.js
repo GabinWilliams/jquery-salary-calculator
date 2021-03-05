@@ -10,6 +10,8 @@ function handleReady() {
   renderDom(employees);
 }// end handleReady
 
+let salaryTotal = 0;
+
 let employees = [
   {
   first: 'Gabin',
@@ -44,6 +46,9 @@ function addEmployee() {
   if(firstName > 0) {
 
   console.log('clicked');
+
+  $('#totalSalary').empty();
+
   let employee = {
 
     first: $('#firstIn').val(),
@@ -57,15 +62,25 @@ function addEmployee() {
 
   $('#table').append(`
 
-    <tr class="bg-gray-300 font-semibold">
-      <td class="px-4 py-3 border-b border-pink-500">${employee.first}</td>
-      <td class="px-4 py-3 border-b border-pink-500">${employee.last}</td>
-      <td class="px-4 py-3 border-b border-pink-500">${employee.id}</td>
-      <td class="px-4 py-3 border-b border-pink-500">${employee.title}</td>
-      <td class="px-4 py-3 border-b border-pink-500">$${employee.annualSalary}</td>
+    <tr class=" font-semibold">
+      <td class="px-4 py-3 border-b border-gray-500">${employee.first}</td>
+      <td class="px-4 py-3 border-b border-gray-500">${employee.last}</td>
+      <td class="px-4 py-3 border-b border-gray-500">${employee.id}</td>
+      <td class="px-4 py-3 border-b border-gray-500">${employee.title}</td>
+      <td class="px-4 py-3 border-b border-gray-500">$${employee.annualSalary}</td>
     </tr>
   `)
+
+    salaryTotal += Number(employee.annualSalary);
+    console.log(salaryTotal);
+    $('#totalSalary').append(`
+    ${Number(salaryTotal)}
+  `)
+    console.log(salaryTotal);
+  
+
   clearInputs();
+
   }// end if
 }// end addEmployee
 
@@ -74,13 +89,17 @@ function renderDom(array) {
   for(let i = 0; i < array.length; i++)
   $('#table').append(`
 
-  <tr class="bg-gray-300 font-semibold">
-    <td class="px-4 py-3 border-b border-pink-500">${array[i].first}</td>
-    <td class="px-4 py-3 border-b border-pink-500">${array[i].last}</td>
-    <td class="px-4 py-3 border-b border-pink-500">${array[i].id}</td>
-    <td class="px-4 py-3 border-b border-pink-500">${array[i].title}</td>
-    <td class="px-4 py-3 border-b border-pink-500">$${array[i].annualSalary}</td>
+  <tr class="font-semibold">
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].first}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].last}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].id}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].title}</td>
+    <td class="px-4 py-3 border-b border-gray-500">$${array[i].annualSalary}</td>
   </tr>
+  `)
+
+  $('#totalSalary').append(`
+    ${salaryTotal}
   `)
 }// end renderDom
 
