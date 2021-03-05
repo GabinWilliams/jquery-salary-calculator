@@ -1,66 +1,61 @@
-console.log('JS ready');
+console.log("JS ready");
 
 $(document).ready(handleReady);
 
 function handleReady() {
-  console.log('Jquery Ready');
+  console.log("Jquery Ready");
 
-  $('#submitBtn').on('click', addEmployee);
+  $("#submitBtn").on("click", addEmployee);
 
   renderDom(employees);
-}// end handleReady
+} // end handleReady
 
 let salaryTotal = 0;
 
 let employees = [
   {
-  first: 'Gabin',
-  last: 'Williams',
-  id: 01,
-  title: 'Boss',
-  annualSalary: 100000000
-},
-{
-  first: 'Smith',
-  last: 'Johnson',
-  id: 02,
-  title: 'Developer',
-  annualSalary: 100000
-},
-
-];// end employees
+    first: "Gabin",
+    last: "Williams",
+    id: 01,
+    title: "Boss",
+    annualSalary: 100000000,
+  },
+  {
+    first: "Smith",
+    last: "Johnson",
+    id: 02,
+    title: "Developer",
+    annualSalary: 100000,
+  },
+]; // end employees
 
 function clearInputs() {
-
-  $('#firstIn').val('')
-  $('#lastIn').val('')
-  $('#idIn').val('')
-  $('#titleIn').val('')
-  $('#salaryIn').val('')
-}// end clearInputs
+  $("#firstIn").val("");
+  $("#lastIn").val("");
+  $("#idIn").val("");
+  $("#titleIn").val("");
+  $("#salaryIn").val("");
+} // end clearInputs
 
 function addEmployee() {
+  let firstName = $("#firstIn").val().length;
 
-  let firstName = $('#firstIn').val().length
+  if (firstName > 0) {
+    console.log("clicked");
 
-  if(firstName > 0) {
+    $("#totalSalary").empty();
 
-  console.log('clicked');
+    let employee = {
+      first: $("#firstIn").val(),
+      last: $("#lastIn").val(),
+      id: $("#idIn").val(),
+      title: $("#titleIn").val(),
+      annualSalary: $("#salaryIn").val(),
+    };
 
-  $('#totalSalary').empty();
+    employees.push(employee);
 
-  let employee = {
-
-    first: $('#firstIn').val(),
-    last: $('#lastIn').val(),
-    id: $('#idIn').val(),
-    title: $('#titleIn').val(),
-    annualSalary: $('#salaryIn').val()
-  }
-
-  employees.push(employee);
-
-  $('#table').append(`
+    $("#table").append(`
 
     <tr class=" font-semibold">
       <td class="px-4 py-3 border-b border-gray-500">${employee.first}</td>
@@ -69,25 +64,23 @@ function addEmployee() {
       <td class="px-4 py-3 border-b border-gray-500">${employee.title}</td>
       <td class="px-4 py-3 border-b border-gray-500">$${employee.annualSalary}</td>
     </tr>
-  `)
+  `);
+    let monthlySalary = employee.annualSalary / 12;
 
-    salaryTotal += Number(employee.annualSalary);
+    salaryTotal += Number(Math.round(monthlySalary));
     console.log(salaryTotal);
-    $('#totalSalary').append(`
+
+    $("#totalSalary").append(`
     ${Number(salaryTotal)}
-  `)
-    console.log(salaryTotal);
-  
+    `);
 
-  clearInputs();
-
-  }// end if
-}// end addEmployee
+    clearInputs();
+  } // end if
+} // end addEmployee
 
 function renderDom(array) {
-
-  for(let i = 0; i < array.length; i++)
-  $('#table').append(`
+  for (let i = 0; i < array.length; i++)
+    $("#table").append(`
 
   <tr class="font-semibold">
     <td class="px-4 py-3 border-b border-gray-500">${array[i].first}</td>
@@ -96,10 +89,9 @@ function renderDom(array) {
     <td class="px-4 py-3 border-b border-gray-500">${array[i].title}</td>
     <td class="px-4 py-3 border-b border-gray-500">$${array[i].annualSalary}</td>
   </tr>
-  `)
+  `);
 
-  $('#totalSalary').append(`
+  $("#totalSalary").append(`
     ${salaryTotal}
-  `)
-}// end renderDom
-
+  `);
+} // end renderDom
