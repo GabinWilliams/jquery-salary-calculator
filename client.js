@@ -54,7 +54,7 @@ function addEmployee() {
     salaryTotal += Number(Math.round(monthlySalary));
 
     // increments count for unique id on employee
-    
+
     renderDom(employees);
     clearInputs();
   } // end if
@@ -65,8 +65,7 @@ function renderDom(array) {
   $("#tbody").html("");
   // use forEach to allow me to use delete later on
   // array.forEach((employee) => {
-    for(let i = 0; i < array.length; i++) {
-
+  for (let i = 0; i < array.length; i++) {
     $("#tbody").append(`
 
   <tr class=" row font-semibold">
@@ -86,25 +85,23 @@ function renderDom(array) {
     $("#totalSalary").append(`
     ${Number(salaryTotal)}
   `);
-  // });
-    }
+    // });
+  }
 } // end renderDom
 
 function removeEmployee() {
   console.log("delete clicked");
 
   // targets specific item
-  
+
   // deletes that specific employee from array
-  
-  for(let i = 0; i < employees.length; i++) {
+
+  for (let i = 0; i < employees.length; i++) {
     let index = Number($(this).data("index"));
     let salary = employees[i].annualSalary;
     let value = salary / 12;
-    
-    
 
-    if(Number(employees[i].id) === Number(index)) {
+    if (Number(employees[i].id) === Number(index)) {
       console.log(employees[i].id);
       // employees.splice(employees[i]);
 
@@ -112,16 +109,8 @@ function removeEmployee() {
 
       salaryTotal -= Math.round(value);
 
-      
-
       renderDom(employees);
-    }
-    
-  }
-
-  // delete employees[index];
-
+    } // end if
+  } // end for
   console.log(employees);
-  // renders Dom remove deleted employee
-  
-}
+} // end removeEmployee
