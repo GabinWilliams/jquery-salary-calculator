@@ -13,7 +13,6 @@ function handleReady() {
 } // end handleReady
 
 let salaryTotal = 0;
-let count = 0;
 let employees = [];
 
 function clearInputs() {
@@ -32,13 +31,12 @@ function addEmployee() {
   let salary = $("#salaryIn").val();
 
   // input value validation
-  if (firstName > 0 && salary >= 1 && id > 0 && title > 0) {
+  if (firstName > 0 && salary >= 1 && lastName > 0 && id > 0 && title > 0) {
     console.log("clicked");
     // empties total monthly cost to avoid double numbers
     $("#totalSalary").empty();
 
     let employee = {
-      index: `${count}`,
       first: $("#firstIn").val(),
       last: $("#lastIn").val(),
       id: $("#idIn").val(),
@@ -56,7 +54,7 @@ function addEmployee() {
     salaryTotal += Number(Math.round(monthlySalary));
 
     // increments count for unique id on employee
-    count++;
+    
     renderDom(employees);
     clearInputs();
   } // end if
@@ -66,17 +64,19 @@ function renderDom(array) {
   //clears Dom to kill zombies or double renders
   $("#tbody").html("");
   // use forEach to allow me to use delete later on
-  array.forEach((employee) => {
+  // array.forEach((employee) => {
+    for(let i = 0; i < array.length; i++) {
+
     $("#tbody").append(`
 
   <tr class=" row font-semibold">
-    <td class="px-4 py-3 border-b border-gray-500">${employee.first}</td>
-    <td class="px-4 py-3 border-b border-gray-500">${employee.last}</td>
-    <td class="px-4 py-3 border-b border-gray-500">${employee.id}</td>
-    <td class="px-4 py-3 border-b border-gray-500">${employee.title}</td>
-    <td class="px-4 py-3 border-b border-gray-500">$${employee.annualSalary}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].first}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].last}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].id}</td>
+    <td class="px-4 py-3 border-b border-gray-500">${array[i].title}</td>
+    <td class="px-4 py-3 border-b border-gray-500">$${array[i].annualSalary}</td>
     <td class="px-4 py-3 border-b border-gray-500">
-    <button class="deleteBtn bg-transparent text-red-600 font-semibold py-1 px-4 border border-red-300 hover:border-red-700 float-right rounded" data-index=${employee.index}>Delete</>
+    <button class="deleteBtn bg-transparent text-red-600 font-semibold py-1 px-4 border border-red-300 hover:border-red-700 float-right rounded" data-index=${array[i].id}>Delete</>
   </td>
   </tr>
   `);
@@ -86,26 +86,42 @@ function renderDom(array) {
     $("#totalSalary").append(`
     ${Number(salaryTotal)}
   `);
-  });
+  // });
+    }
 } // end renderDom
 
 function removeEmployee() {
   console.log("delete clicked");
 
   // targets specific item
-  let index = $(this).data("index");
-  // deletes that specific employee from array
-  let salary = employees[index].annualSalary;
-
-  let value = salary / 12;
-
-  salaryTotal -= Math.round(value);
-
   
+  // deletes that specific employee from array
+  
+  for(let i = 0; i < employees.length; i++) {
+    let index = Number($(this).data("index"));
+    let salary = employees[i].annualSalary;
+    let value = salary / 12;
+    
+    
 
-  delete employees[index];
+    if(Number(employees[i].id) === Number(index)) {
+      console.log(employees[i].id);
+      // employees.splice(employees[i]);
+
+      employees.splice(i, 1);
+
+      salaryTotal -= Math.round(value);
+
+      
+
+      renderDom(employees);
+    }
+    
+  }
+
+  // delete employees[index];
 
   console.log(employees);
   // renders Dom remove deleted employee
-  renderDom(employees);
+  
 }
