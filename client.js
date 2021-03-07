@@ -51,7 +51,7 @@ function addEmployee() {
     // calc for monthlySalary number
     let monthlySalary = employee.annualSalary / 12;
     // makes sure answer is number so it adds correctly
-    salaryTotal += Number(Math.round(monthlySalary));
+    salaryTotal += Math.round(monthlySalary);
 
     // increments count for unique id on employee
 
@@ -82,10 +82,17 @@ function renderDom(array) {
 
     $("#totalSalary").empty();
 
+    
     $("#totalSalary").append(`
     ${Number(salaryTotal)}
   `);
     // });
+  }
+  if(employees.length === 0) {
+  $("#totalSalary").empty();
+  $("#totalSalary").append(`
+  0
+`);
   }
 } // end renderDom
 
