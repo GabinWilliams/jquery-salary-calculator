@@ -6,7 +6,7 @@ _Duration: Solo Jquery/JavaScript Project_
 
 This is Salary Calculator app from scratch.
 
-[screenshot of the app]('./ProjectScreenshot.png')
+[screenshot of the app](https://github.com/gabinwilliams/jquery-salary-calculator/blob/master/ProjectScreenshot.png)
 
 ### Prerequisites
 
