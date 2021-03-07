@@ -91,11 +91,8 @@ function renderDom(array) {
 
 function removeEmployee() {
   console.log("delete clicked");
-
-  // targets specific item
-
+  
   // deletes that specific employee from array
-
   for (let i = 0; i < employees.length; i++) {
     let index = Number($(this).data("index"));
     let salary = employees[i].annualSalary;
