@@ -88,7 +88,15 @@ function renderDom(array) {
   `);
     // });
   }
+  if(salaryTotal >= 20000) {
+    $("#totalSalary").addClass('bg-red-500')
+    if(salaryTotal < 20000) {
+      $("#totalSalary").removeClass('bg-red-500')
+    }
+  }
+
   if(employees.length === 0) {
+    salaryTotal = 0;
   $("#totalSalary").empty();
   $("#totalSalary").append(`
   0
